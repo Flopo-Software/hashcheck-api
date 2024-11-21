@@ -55,7 +55,6 @@ A API possui as seguintes funcionalidades:
 3. A API estará disponível em http://127.0.0.1:5000.
 
 
-### Endpoints da API
 
 
 
