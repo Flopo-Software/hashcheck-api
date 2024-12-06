@@ -83,7 +83,16 @@ Enviar um arquivo no formato form-data com a chave file.
 
 
 
+---
 
+## **Como Testar a API**
 
+### **Exemplo de Requisição com `curl`**
+
+Use o comando abaixo para testar o endpoint `/check-file` enviando um arquivo no formato `form-data`:
+
+```bash
+curl -X POST http://127.0.0.1:5000/check-file \
+-F "file=@/caminho/para/seu/arquivo.pdf"
 
 
