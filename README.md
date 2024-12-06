@@ -67,7 +67,10 @@ python app.py
 ```
 A API estará disponível em http://127.0.0.1:5000.
 
-Endpoints Disponíveis
+
+---
+
+## Endpoints Disponíveis
 1. /check-file (POST)
 - Descrição: Verifica se um arquivo já existe no bucket com base no hash. Caso não exista, faz o upload do arquivo.
 - Requisição:
