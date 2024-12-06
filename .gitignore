@@ -1,2 +1,18 @@
 # Ignorar credenciais
 pythonCloudStorage/*.json
+
+# Credenciais sensíveis
+pythonCloudStorage/perlas-key.json
+
+# Arquivos temporários do Python
+*.pyc
+__pycache__/
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# Configurações do VS Code
+.vscode/
+
+/tests
