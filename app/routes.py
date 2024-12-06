@@ -2,16 +2,15 @@ import hashlib
 import json
 import os
 from flask import Blueprint, request, jsonify
-from google.cloud import storage  # Biblioteca para GCS
-from app.utils import hash_index, save_hash_index  # Função para salvar o índice
+from google.cloud import storage  
+from app.utils import hash_index, save_hash_index 
 from dotenv import load_dotenv
 load_dotenv()
 
 
 bp = Blueprint('routes', __name__)
 
-# Configuração para o Google Cloud Storage
-GCS_BUCKET_NAME = "pocdetro"  # Substitua pelo nome do seu bucket
+GCS_BUCKET_NAME = "pocdetro" 
 
 @bp.route('/check-file', methods=['POST'])
 def check_file_existence():
@@ -21,12 +20,10 @@ def check_file_existence():
         return jsonify({"error": "Arquivo é obrigatório"}), 400
 
     try:
-        # Calcular o hash do arquivo recebido
         file.seek(0)
         file_hash = hashlib.md5(file.read()).hexdigest()
         file.seek(0)
 
-        # Verificar no índice de hashes
         if file_hash in hash_index:
             return jsonify({
                 "message": "Arquivo já existe no bucket",
@@ -34,18 +31,16 @@ def check_file_existence():
                 "file_name": hash_index[file_hash]
             }), 200
 
-        # Caso o arquivo não seja encontrado no índice
-        # Fazer upload para o Google Cloud Storage
+
         client = storage.Client()
         bucket = client.bucket(GCS_BUCKET_NAME)
         blob = bucket.blob(file.filename)
 
-        file.seek(0)  # Certifique-se de reposicionar o cursor
+        file.seek(0)  
         blob.upload_from_file(file)
 
-        # Adicionar o novo hash ao índice
         hash_index[file_hash] = file.filename
-        save_hash_index(hash_index)  # Salvar o índice atualizado no disco
+        save_hash_index(hash_index) 
 
         return jsonify({
             "message": "Arquivo não encontrado no bucket, mas foi enviado",
