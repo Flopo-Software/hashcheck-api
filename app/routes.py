@@ -4,9 +4,6 @@ import os
 from flask import Blueprint, request, jsonify
 from google.cloud import storage  
 from app.utils import hash_index, save_hash_index 
-from dotenv import load_dotenv
-load_dotenv()
-
 
 bp = Blueprint('routes', __name__)
 
